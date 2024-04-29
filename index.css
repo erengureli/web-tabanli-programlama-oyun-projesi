@@ -1,0 +1,61 @@
+body{
+    background-image: url("./img/background.jpg");
+}
+
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -10;
+
+    border-style: solid;
+    border-width: 10px;
+    border-color: #010519;  
+
+    cursor: url("./img/map/mouse/cursor_attack.png"), auto;
+}
+
+.tutButton{
+    z-index: 10;
+}
+
+.tutPopup{
+    display: none;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: black 0px 5px 15px;
+
+    position: absolute;
+    z-index: 20;
+
+    min-width: 500px;
+    min-height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+
+    top: 15%;
+    left: 35%;
+    right: 35%;
+
+    h1{
+        text-align: center;
+        font-family: "DotGothic16";
+    }
+
+    li{
+        font-family: "DotGothic16";
+        list-style-type: square;
+    }
+
+    p{
+        font-family: "DotGothic16";
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    
+}

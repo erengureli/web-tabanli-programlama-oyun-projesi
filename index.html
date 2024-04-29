@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dungeon Game</title>
+        <link rel="stylesheet" href="index.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <canvas></canvas>
+        
+        <button class="tutButton" style="border: 0; background: transparent;" id="tutButton" onclick="openTutorial()">
+            <img src="img/tutorial_button.png" alt="Tutorial Button">
+        </button>
+        
+        <div class="tutPopup" id="tutPopup">
+            <h1>Oynanıs</h1>
+            <ul>
+                <li>W A S D ile karakter haraket ettiriliyor.</li>
+                <li>
+                    Fare sol tuşu ile alan hasarı veren normal saldırı yapıyor.
+                    <ul>
+                        <li>Bekleme Süresi: 0.5 Saniye</li>
+                        <li>Sersemletme Süresi: 0.25 Saniye</li>
+                    </ul>
+                </li>
+                <li>
+                    E tuşu ile yeteneğini kullanıyor.
+                    <ul>
+                        <li>Bekleme Süresi: 5 Saniye</li>
+                        <li>Sersemletme Süresi: 4 Saniye</li>
+                    </ul>
+                </li>
+            </ul>
+            <h1>Amac</h1>
+            <p>En uzun süre hayatta kalmak ya da en fazla canavarı öldürmek.</p>
+        </div>
+    </body>
+    <script src="js/collisions.js"></script>
+    <script src="js/utils.js"></script>
+
+    <script src="js/classes/Player.js"></script>
+    <script src="js/classes/Monster.js"></script>
+    <script src="js/classes/Sprite.js"></script>
+
+    <script src="game.js"></script>
+    <script src="eventListeners.js"></script>
+
+    <script src="index.js"></script>
+</html>
