@@ -1,7 +1,7 @@
 # Web Tabanlı Programlama Oyun Projesi
 
 ### [Oyunun Linki](https://erengureli.github.io/web-tabanli-programlama-oyun-projesi/)
-### [Videonun Linki]()
+### [Videonun Linki](https://www.youtube.com/watch?v=Lb-xQWFjEWU)
 
 ## Oynanış
 - **W A S D** ile haraket ettiriliyor.
