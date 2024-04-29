@@ -8,12 +8,12 @@
 - **Fare Sol Tuşu** ile alan hasarı veren normal saldırı yapıyor.
   - **Bekleme Süresi:** 0.5 Saniye
   - **Sersemletme Süresi:** 0.25 Saniye
-- **E Tuşu** ile zaman durdurma yeteneği kullanıyor.
+- **E Tuşu** ile zaman durdurma yeteneğini kullanıyor.
   - **Bekleme Süresi:** 5 Saniye
   - **Sersemletme Süresi:** 4 Saniye
 
 ## Oyunun Amacı
-En uzun süre hayatta kalmak ya da en fazla canavarı öldürmek.
+En uzun süre hayatta kalıp en fazla canavarı öldürmek.
 
 ## Oyun İçi Görüntüler
 
