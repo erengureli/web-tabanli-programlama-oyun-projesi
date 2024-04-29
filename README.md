@@ -14,9 +14,9 @@
 
 ## Oyun İçi Görüntüler
 
-[Image1](github-imgs/image1.png)
-[Image2](github-imgs/image2.png)
-[Image3](github-imgs/image3.png)
+![Image1](github-imgs/image1.png)
+![Image2](github-imgs/image2.png)
+![Image3](github-imgs/image3.png)
 
 ## Kullandığım Asset'ler
 - [Map, Karakterler ve Animasyonları](https://melthie.itch.io/mini-dungeon)
