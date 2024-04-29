@@ -29,7 +29,7 @@ class Monster{
 
     }
 
-    draw(){
+    draw(){ // Canavarı renderliyor
         if(fpsCount % this.fpsFrame == 0) this.frame++
 
         if(this.animNo == 0 && this.frame >= 2){
@@ -57,14 +57,14 @@ class Monster{
         c.restore()
     }
 
-    move(){
+    move(){ // Karakterin hizina göre konumunu değiştiriyor
         if(this.canWalk < fpsCount){
             this.position.x += this.velocity.x
             this.position.y += this.velocity.y
         }
     }
 
-    changeAnim(no){
+    changeAnim(no){ // Animasyonu değiştiriyo
 
         if(!this.canAnim) return
 
@@ -79,14 +79,14 @@ class Monster{
 
     }
 
-    getHit(){
+    getHit(){ // Hasar alınca özel animasyon giriyor
         this.animNo = 3
         this.frame = 1
         this.fpsFrame = 10
         this.canAnim = false
     }
 
-    goto(pos){
+    goto(pos){ // Girilen pozisyona doğru hızı değişiyor
         let dx = pos.x - this.position.x
         let dy = pos.y - this.position.y
         let hypotenuse = Math.sqrt(dx*dx + dy*dy)

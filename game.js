@@ -197,7 +197,7 @@ function mapScene(){
     c.save()
     c.scale(3,3)
 
-    // renderables içindeki bütün eşyaları renderlıyor(draw() fonksiyonunu çağırıyor)
+    // Renderables içindeki bütün eşyaları renderlıyor(draw() fonksiyonunu çağırıyor)
     renderables.forEach((item) => {
         item.draw()
     })
@@ -430,7 +430,7 @@ function endMenuScene(){
 // Menu Game Loop
 function menuScene(){
     c.save()
-    backgroundMenu.draw() // Arkapla
+    backgroundMenu.draw() // Arkaplan
     c.scale(3,3)
     playButton.draw() // Play buttonu
     c.restore()
@@ -465,7 +465,7 @@ function gameloop(){
     }
 }
 
-// Event Listeners
+// Event Listeners //
 
 // Mouse Sol Tuş
 canvas.addEventListener('click', (event) => {

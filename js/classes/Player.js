@@ -26,7 +26,7 @@ class Player{
 
     }
 
-    draw(){
+    draw(){ // Oyuncuyu renderliyor
         if(fpsCount % this.fpsFrame == 0) this.frame++
 
         if(this.animNo == 0 && this.frame >= 2){
@@ -55,7 +55,7 @@ class Player{
         c.restore()
     }
 
-    changeAnim(no){
+    changeAnim(no){ // Oyuncunun animasyonunu değiştiriyor
 
         if(this.animNo == 2) return
         if(!this.canAnim) return
@@ -71,14 +71,14 @@ class Player{
 
     }
 
-    getHit(){
+    getHit(){ // Oyuncu hasar alınca özel bir animasyon giriyo
         this.animNo = 3
         this.frame = 1
         this.fpsFrame = 10
         this.canAnim = false
     }
 
-    attack(){
+    attack(){ // Saldırınca özel bir animasyon devreye giriyor
         this.animNo = 2
         this.fpsFrame = 3
         this.frame = 0

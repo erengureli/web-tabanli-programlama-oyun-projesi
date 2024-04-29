@@ -1,4 +1,4 @@
-function rectangularCollision({rectangle1, rectangle2}) { // If 2 rectangle is coliding then returns true
+function rectangularCollision({rectangle1, rectangle2}) { // 2 Obje çakışıyor mu diye kontrol ediyor
   return (
     rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&
     rectangle1.position.x <= rectangle2.position.x + rectangle2.width &&

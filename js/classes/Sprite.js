@@ -12,7 +12,7 @@ class Sprite{
 
     }
 
-    draw(){ // rendering sprite
+    draw(){ // Sprite'ı renderlama
         c.save()
         c.drawImage(this.image, this.position.x, this.position.y)
         c.restore()
