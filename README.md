@@ -12,6 +12,9 @@
   - **Bekleme Süresi:** 5 Saniye
   - **Sersemletme Süresi:** 4 Saniye
 
+## Oyunun Amacı
+En uzun süre hayatta kalmak ya da en fazla canavarı öldürmek.
+
 ## Oyun İçi Görüntüler
 
 ![Image1](github-imgs/image1.png)
