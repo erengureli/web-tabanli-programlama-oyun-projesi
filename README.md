@@ -1,2 +1,2 @@
-# web-tabanli-programlama-oyun-projesi
-Web Tabanlı Programlama için verilen oyun projesinin kaynak kodu
+## Oyunun Linki
+Link: https://erengureli.github.io/web-tabanli-programlama-oyun-projesi/
