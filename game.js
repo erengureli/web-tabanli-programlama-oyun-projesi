@@ -34,7 +34,7 @@ const cursoImgs = [
     'url("./img/map/mouse/cursor_attack.png"), auto'
 ]
 
-// Monsters Spawn locations
+// canavarların ortaya çıkma noktaları (8 tane)
 const spawnPositions = [
     {
         x: ((canvas.width/2)-16)/3,
@@ -70,7 +70,7 @@ const spawnPositions = [
     }
 ]
 
-// For Movements
+// haraket etme kodları için tuşlar
 const keys = {
     w: {
         pressed: false
@@ -87,7 +87,7 @@ const keys = {
 }
 
 
-// Creating Sprite Object with loop and pushing them in collisionsBlocks Array
+// Döngü ile her collision blok için Sprite obje oluşturuyor
 const collisionsBlocks = []
 for(let i = 0; i < collisions.length; i++){
     let col = i%100
@@ -105,8 +105,8 @@ for(let i = 0; i < collisions.length; i++){
 }
 
 
-// Objects
-// Position Sprite
+// Objeler //
+// Konum objesi (Spesifik bir olay için kullanıyorum)
 const pos = new Sprite({
     position:{
         x: 0,
@@ -115,7 +115,7 @@ const pos = new Sprite({
     imageSrc:'./img/map/map.png'
 })
 
-// Background Sprite
+// Arkaplan
 const mapBackground = new Sprite({
     position:{
         x: -627,
@@ -124,7 +124,7 @@ const mapBackground = new Sprite({
     imageSrc:'./img/map/map.png'
 })
 
-// Foreground Sprite
+// Arkaplan ama karakterimizin önünde renderlanan objeler (Kutular)
 const mapForeground = new Sprite({
     position:{
         x: -627,
@@ -133,7 +133,7 @@ const mapForeground = new Sprite({
     imageSrc:'./img/map/foreground.png'
 })
 
-// Player Object
+// Oyuncu
 const player = new Player({
     position:{
         x: ((canvas.width/2)-16)/3,
@@ -145,7 +145,7 @@ const player = new Player({
     }
 })
 
-// top rigth Attack Sprite
+// Sağ alttaki attack resmi
 const attack = new Sprite({
     position:{
         x: canvas.width/3 - 32,
@@ -154,7 +154,7 @@ const attack = new Sprite({
     imageSrc:'./img/map/player/attack.png'
 })
 
-// top rigth Skill Sprite
+// Sağ alttaki skill resmi
 const skill = new Sprite({
     position:{
         x: canvas.width/3 - 16,
@@ -177,12 +177,12 @@ var renderables = []
 // Map(In Game) Game Loop
 function mapScene(){
 
-    // Checking player HP for End Game Menu
+    // Karakterin canı bitince End Game Menu sahnesine göndercek
     if(player.health <= 0){
         sceneNum = 2
     }
 
-    // Refreshing all arrays
+    // Bütün arayleri yeniliyor(yeni canavar vb eklendiğinde renderlaması için)
     ui = []
     ui = ui.concat(hearts, attack, skill)
 
@@ -193,35 +193,35 @@ function mapScene(){
     movables = movables.concat(pos, mapBackground, mapForeground, boundaries, monsters)
 
 
-    // Rendering
+    // Render'lıyorum
     c.save()
     c.scale(3,3)
 
-    // Rendering all renderables
+    // renderables içindeki bütün eşyaları renderlıyor(draw() fonksiyonunu çağırıyor)
     renderables.forEach((item) => {
         item.draw()
     })
 
-    // Rendering max hit circle
+    // Maksimum vurabileceği yeri gösteren halkayı renderlıyor
     c.beginPath()
     c.strokeStyle = 'rgb(0, 0, 0, 0.6)'
     c.arc(((canvas.width/2) + 7)/3, ((canvas.height/2 + 6))/3, 50, 0, 2 * Math.PI, false)
     c.stroke()
 
-    // Rendering and Calculating Time
+    // Hayatta kalma süresini hesaplayıp renderlıyor
     surviveDate = new Date(Date.now() - startDate)
     c.font = '12px DotGothic16'
     c.textAlign = 'center'
     c.fillStyle = 'black'
     c.fillText(surviveDate.getMinutes().toString().padStart(2, '0') + ':' + surviveDate.getSeconds().toString().padStart(2, '0'), canvas.width/6, 10)
 
-    // Rendering Kills
+    // Kill'leri hesaplıyor
     c.font = '12px DotGothic16'
     c.textAlign = 'right'
     c.fillStyle = 'black'
     c.fillText('Kills: ' + kill, canvas.width/3, 10)
 
-    // Attack and Skill Cooldown Animations
+    // Attack ve Skill dolma animasyonunu renderlıyor
     if( fpsCount <= skillTime + skillCD){
         c.fillStyle = 'rgb(0, 0, 0, 0.7)'
         c.fillRect(canvas.width/3 - 16 + 1, canvas.height/3 - (fpsCount-skillTime)/skillCD * 16 + 1, 14, (fpsCount-skillTime)/skillCD * 16 - 2)
@@ -234,11 +234,11 @@ function mapScene(){
     c.restore()
 
 
-    player.changeAnim(0) // Reseting player animation
-    player.right = (mousex >= 512) // Setting player direction with mousex
+    player.changeAnim(0) // Oyuncunun animasyonunu resetliyor
+    player.right = (mousex >= 512) // Oyuncunun yönünü farenin yerie göre değiştiriyor
 
 
-    // Monster Spawner
+    // Canavarları oluşturuyor(Aynı anda max 5 tane oluşturuyor)
     if(monsters.length <= 4){
         let ranodmi = Math.floor(Math.random()*8 -0.1)
         monsters.push(new Monster({
@@ -255,18 +255,18 @@ function mapScene(){
         }))
     }
 
-    // Calling all monsters
+    // Bütün canvarları teker teker çağırıyoruz(foreach)
     monsters.forEach((item, index) => {
-        // If any monster hp is below 0
+        // Canavarın canı 0'dan az ise öldürüyor
         if(item.health <= 0){
             monsters.splice(index, 1)
             kill++
         }
 
-        // Making monsters folow player
+        // Canavarın oyuncuyu takip etmesini sağlıyor
         item.goto(player.position)
 
-        // If any monster coliding with player
+        // Canavarlardan biri oyuncuyla çakışıyorsa 2'side hasar alıyor ve canavar geriye doğru uçuyor
         if(rectangularCollision({rectangle1:player, rectangle2:item})){
             item.canWalk = fpsCount + attackStun
             item.getHit()
@@ -282,7 +282,7 @@ function mapScene(){
     })
 
 
-    // Hearts for showing player health
+    // Sağ üstteki kalplerin oluşması (azalması, artması)
     if(hearts.length > player.health){
         hearts.pop()
     }
@@ -297,7 +297,7 @@ function mapScene(){
     }
 
 
-    // Mouse Icon changes when Attack in Cooldown
+    // Attack bekleme süresindeyken fare iconunun değişmesi
     if(fpsCount >= attackTime + attackCD){
         canvas.style.cursor = cursoImgs[3]
     }
@@ -311,7 +311,7 @@ function mapScene(){
         canvas.style.cursor = cursoImgs[2]
     }
 
-    // W A S D Movement Codes
+    // W A S D ile haraket komutu
     let move = true 
     if(keys.w.pressed){
         player.changeAnim(1)
@@ -392,7 +392,7 @@ function mapScene(){
 }// Map(In Game) Game Loop End
 
 
-// Objects for End Menu and Menu Scenes
+// Objeler
 const backgroundMenu = new Sprite({
     position:{
         x: 0,
@@ -412,14 +412,14 @@ const playButton = new Sprite({
 // End Menu Scene
 function endMenuScene(){
     c.save()
-    backgroundMenu.draw() // Background
+    backgroundMenu.draw() // Arkaplanı renderliyoruz
 
     c.font = '80px DotGothic16'
     c.textAlign = 'center'
     c.fillStyle = 'red'
-    c.fillText('YOU DIED', canvas.width/2, canvas.height*1/3) // YOU DIED Text
+    c.fillText('YOU DIED', canvas.width/2, canvas.height*1/3) // YOU DIED yazısı
 
-    // Time and Kills Text
+    // Time ve Kills yazıları
     c.font = '50px DotGothic16'
     c.fillStyle = 'black'
     c.fillText('Time: ' + surviveDate.getMinutes().toString().padStart(2, '0') + ':' + surviveDate.getSeconds().toString().padStart(2, '0') , canvas.width/2, canvas.height/2)
@@ -430,9 +430,9 @@ function endMenuScene(){
 // Menu Game Loop
 function menuScene(){
     c.save()
-    backgroundMenu.draw() // Background
+    backgroundMenu.draw() // Arkapla
     c.scale(3,3)
-    playButton.draw() // Play Button
+    playButton.draw() // Play buttonu
     c.restore()
 }
 
@@ -442,13 +442,13 @@ then = Date.now()
 function gameloop(){
     window.requestAnimationFrame(gameloop) // Loop code
 
-    // Stable 60 FPS code
+    // Sabit 60 FPS için özel kod
     now = Date.now();
     elapsed = now - then;
     if (elapsed > (1000/fps)) {
         then = now - (elapsed % (1000/fps));
 
-        // Calling Sellected Scene
+        // sceneNum neyse ona göre sceneyi çağırıyor
         switch(sceneNum){
             case 0: // Menu
                 menuScene()
@@ -467,23 +467,23 @@ function gameloop(){
 
 // Event Listeners
 
-// Left Mouse Click Listener
+// Mouse Sol Tuş
 canvas.addEventListener('click', (event) => {
 
-    // Getting mouse x and y values
+    // Farenin x ve y değerlerini hesaplıyoruz
     let x = event.pageX - (canvas.clientLeft + canvas.offsetLeft)
     let y = event.pageY - (canvas.clientTop + canvas.offsetTop)
 
-    if(sceneNum == 0){ // Button For Menu
+    if(sceneNum == 0){ // Ana Menudeki Play butonu
         if(x < 643 && y < 320 && x > 366 && y > 237){
             sceneNum = 1
             startDate = new Date(Date.now())
         }
     }
-    else if(sceneNum == 1){ // Left Click Attack
+    else if(sceneNum == 1){ // Attack
         if(fpsCount >= attackTime + attackCD){
-            player.attack() // Player attack animation
-            monsters.forEach((item) => { // Checking is there any monster collide with player
+            player.attack() // Oyuncu attack animasyonu
+            monsters.forEach((item) => { // Herhangi bir canavar oyuncunun attack alanının içine girdimi diye kontrol ediyor(uzaklık hesabıyla)
                 let distance = Math.sqrt(Math.pow(item.position.y+4 - player.position.y, 2) + Math.pow(item.position.x+4 - player.position.x, 2))
                 if(distance <= 55){
                     item.getHit()
@@ -493,18 +493,18 @@ canvas.addEventListener('click', (event) => {
                     item.health -= player.damage
                 }
             })
-            attackTime = fpsCount // Attack cooldown
+            attackTime = fpsCount // Attack bekleme süresini ayarlıyor
         }
     }
 })
 
-// Getting Mouse Coordinates
+// Farenin kordinatlarını alıyorum
 canvas.addEventListener('mousemove', (event) => {
     mousex = event.pageX - (canvas.clientLeft + canvas.offsetLeft)
     mousey = event.pageY - (canvas.clientTop + canvas.offsetTop)
 })
 
-// Keyboard Inputs
+// Klavye girdileri
 window.addEventListener('keydown', (event) => {
 
     if(sceneNum == 1){
@@ -536,7 +536,7 @@ window.addEventListener('keydown', (event) => {
 
 })
 
-// Keyboard Input End (For walking)
+// Klavye girdisi bitince (yürüme için)
 window.addEventListener('keyup', (event) => {
 
     if(sceneNum == 1){

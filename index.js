@@ -1,6 +1,6 @@
 const tutPopup = document.getElementById("tutPopup")
 
-// Making TUTORIAL button to open/close tutorial popup
+// TUTORIAL butonuna basınca tutorial pupup'ını aç/kapa yapıyor
 function openTutorial(){
     if(tutPopup.style.display == 'block'){
         tutPopup.style.display = ''
@@ -10,4 +10,4 @@ function openTutorial(){
     }
 }
 
-gameloop() // Calling gameloop function
+gameloop() // gameloop fonksiyonunu çağırıyo
